@@ -20,15 +20,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="my-icons.html">
-<link rel="stylesheet" href="https://openlayers.org/en/v3.19.0/css/ol.css" type="text/css">  
-<script src="https://openlayers.org/en/v3.19.0/build/ol.js"></script>
-<link rel="import" href="../bower_components/osm-map/osm-map.html">
-<link rel="import" href="../bower_components/osm-map/osm-marker.html">
-<link rel="import" href="../bower_components/osm-map/osm-point.html">
-<link rel="import" href="../bower_components/osm-map/osm-poly.html">
-<link rel="import" href="../bower_components/osm-map/osm-layer.html">
-
+<link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel="import" href="../bower_components/google-map/google-map-marker.html">
+<link rel="import" href="../bower_components/google-chart/google-chart.html">
 <dom-module id="my-app">
   <template>
     <style>
@@ -73,10 +67,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 350px;
         background: whitesmoke;
       }
-      osm-map{
-        width: 100%;
+      google-chart {
         height: 500px;
-        border: 1px solid red;
+        width: 500px;
       }
     </style>
 
@@ -89,36 +82,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <app-drawer-layout fullbleed>
       <!-- Drawer content -->
-<!--       <app-drawer>
+      <app-drawer>
         <app-toolbar>RadioMap</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="map1" href="/map1">Mapa</a>
+          <a name="estadisticas" href="/estadisticas">Estadísticas</a>
         </iron-selector>
-      </app-drawer> -->
+      </app-drawer>
 
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
-
-<!--         <app-header condenses reveals effects="waterfall">
-          <app-toolbar>
-            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>RadioMap</div>
-          </app-toolbar>
-        </app-header> -->
-
-<!--         <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
-          <osm-map name="map1" latitude="53.834089" longitude="10.703718" zoom="16"></osm-map>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages> -->
-        <osm-map latitude="53.834089" longitude="10.703718" zoom="16">
-           <osm-marker longitude="10.705318" latitude="53.830789"></osm-marker>
-        </osm-map>
+      asdfkasdfasdfasdfasdfasdf
+      <google-chart
+        type='line'
+        options='{"title": "Distribution of days in 2001Q1"}'
+        data='../json/datos.json'>
+      </google-chart>
       </app-header-layout>
     </app-drawer-layout>
   </template>
@@ -134,40 +113,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           observer: '_pageChanged'
         }
       },
-      ready: function(){
-        console.log(ol);
-            var map = new ol.Map({
-            target: 'mapa',
-            layers: [
-              new ol.layer.Tile({
-                source: new ol.source.OSM()
-              })
-            ],
-            view: new ol.View({
-              center: ol.proj.fromLonLat([37.41, 8.82]),
-              zoom: 4
-            })
-            });
-      },
-      attached: function()
-        {
-          this.async(function()
-          {
-            console.log(ol);
-            var map = new ol.Map({
-            target: 'mapa',
-            layers: [
-              new ol.layer.Tile({
-                source: new ol.source.OSM()
-              })
-            ],
-            view: new ol.View({
-              center: ol.proj.fromLonLat([37.41, 8.82]),
-              zoom: 4
-            })
-            });
-          });
-        },
       observers: [
         '_routePageChanged(routeData.page)'
       ],
